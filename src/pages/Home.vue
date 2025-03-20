@@ -45,13 +45,26 @@
 
     <div class="blog" v-if="activeTab === 'blog'">
       <div v-for="post in blogPosts" :key="post.id" class="blog-post">
-        <img v-if="post.image" :src="`${baseURL}${post.image}`" alt="Post Image" class="post-image" />
+        <img v-if="post.image" 
+             :src="`${baseURL}${post.image}`" 
+             alt="Post Image" 
+             class="post-image" 
+             @click="openModal(post.image)" />
         <div class="post-content">
           <p class="post-text">{{ post.text }}</p>
           <p class="post-date">{{ post.date }}</p>
         </div>
       </div>
     </div>
+
+    <transition name="fade">
+      <div v-if="modalImage" class="modal" @click="closeModal">
+        <div class="modal-content" @click.stop>
+          <span class="close" @click="closeModal">×</span>
+          <img :src="`${baseURL}${modalImage}`" class="modal-image" />
+        </div>
+      </div>
+    </transition>
 
     <router-view />
   </div>
@@ -68,6 +81,7 @@ export default {
     return {
       baseURL: import.meta.env.BASE_URL,
       activeTab: 'links',
+      modalImage: null,
       links: [
         { name: 'Gallery', url: '/gallery', icon: 'lets-icons:img-box-duotone-line', internal: true },
         { name: 'My Ratings', url: '/ratings', icon: 'lets-icons:fire-light', internal: true  },
@@ -78,13 +92,21 @@ export default {
       telegramLink: { name: 'Telegram', url: 'https://t.me/oljawave', icon: 'uit:telegram-alt' },
       blogPosts: [
         { id: 1, text: 'Welcome to my personal profile', image: 'blog/first.jpg', date: '19:57 • Mar 20, 2025' },
-        { id: 2, text: 'testing.', date: '11:21 • Mar 19, 2025' },
+        { id: 2, text: 'Testing.', date: '11:21 • Mar 19, 2025' },
       ]
     };
   },
   computed: {
     filteredLinks() {
       return this.links;
+    }
+  },
+  methods: {
+    openModal(image) {
+      this.modalImage = image;
+    },
+    closeModal() {
+      this.modalImage = null;
     }
   }
 };
@@ -230,6 +252,47 @@ html, body {
 .post-date {
   font-size: 14px;
   color: gray;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.modal-image {
+  width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 5px 10px;
+  border-radius: 50%;
+}
+
+.close:hover {
+  background: rgba(255, 255, 255, 0.6);
 }
 
 </style>
