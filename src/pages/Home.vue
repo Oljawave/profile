@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="profile">
-      <img :src="`src/assets/profile.png`" alt="Profile" class="avatar" />
+      <img src="/src/assets/profile.png" alt="Profile" class="avatar" />
       <h2>Gabdullin Olzhas</h2>
       <p style="margin-top: 10px; margin-bottom: 10px; color: #555;">@oljawave</p>
     </div>
