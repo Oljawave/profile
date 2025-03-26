@@ -9,7 +9,8 @@ export default {
       playlist: [
         import.meta.env.BASE_URL + 'audio/play1.m4a',
         import.meta.env.BASE_URL + 'audio/play2.m4a',
-        import.meta.env.BASE_URL + 'audio/play3.m4a'
+        import.meta.env.BASE_URL + 'audio/play3.m4a',
+        import.meta.env.BASE_URL + 'audio/play4.m4a'
       ],
       currentTrackIndex: 0,
       audio: null

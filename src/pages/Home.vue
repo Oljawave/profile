@@ -50,10 +50,10 @@
              alt="Post Image" 
              class="post-image" 
              @click="openModal(post.image)" />
-        <div class="post-content">
-          <p class="post-text">{{ post.text }}</p>
-          <p class="post-date">{{ post.date }}</p>
-        </div>
+             <div class="post-content">
+              <p v-html="post.text"></p>
+              <p class="post-date">{{ post.date }}</p>
+            </div>
       </div>
     </div>
 
@@ -91,6 +91,17 @@ export default {
       ],
       telegramLink: { name: 'Telegram', url: 'https://t.me/oljawave', icon: 'uit:telegram-alt' },
       blogPosts: [
+        {
+          id: 1,
+          text: `<h3 style="margin-bottom: 10px;">Being Bold or Being Wise?</h3>
+                <p>Life often forces us to choose: to be bold and take risks or to be wise and wait for the right moment.</p>
+                <p>Boldness drives us toward great achievements, pushing boundaries and opening doors that might otherwise remain closed. But wisdom? Wisdom is the quiet force that helps us navigate uncertainty, avoid unnecessary losses, and make decisions that stand the test of time.</p>
+                <p>Perhaps true mastery lies in balancing both—knowing when to act fearlessly and when to step back and observe.</p>
+                <p><i>Napoleon once said, "The battle is won by the one who makes the fewest mistakes."</i></p>
+                <p>Maybe success isn’t just about courage but also about calculation.</p>`,
+          image: 'blog/third.jpg',
+          date: '21:09 • Mar 24, 2025'
+        },
         { id: 1, text: 'Astana is a city where the wind blows away the unnecessary, leaving only the essential. Here, the past can’t keep up with the present, and the future is already under construction. The cold teaches resilience, while the endless sky inspires dreams. Perhaps Astana is not just a place, but a state of mind.', image: 'blog/second.jpg', date: '04:46 • Mar 21, 2025' },
         { id: 1, text: 'The Golden Horde did not build walls—it conquered space. Empires vanish, but the ideas born in the steppe live on for centuries.  ', image: 'blog/first.jpg', date: '19:57 • Mar 20, 2025' },
         { id: 2, text: 'Welcome to my personal profile', date: '11:21 • Mar 19, 2025' },
