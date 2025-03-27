@@ -91,6 +91,7 @@ export default {
       ],
       telegramLink: { name: 'Telegram', url: 'https://t.me/oljawave', icon: 'uit:telegram-alt' },
       blogPosts: [
+      { id: 1, text: 'Music is the only language I spoke fluently this year', image: 'blog/fourth.JPEG', date: '16:19 • Mar 27, 2025' },
         {
           id: 1,
           text: `<h3 style="margin-bottom: 10px;">Being Bold or Being Wise?</h3>
