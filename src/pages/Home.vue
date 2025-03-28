@@ -85,13 +85,14 @@ export default {
       links: [
         { name: 'Gallery', url: '/gallery', icon: 'lets-icons:img-box-duotone-line', internal: true },
         { name: 'My Ratings', url: '/ratings', icon: 'lets-icons:fire-light', internal: true  },
+        { name: 'Telegram Channel', url: 'https://t.me/oljawavetime', icon: 'uit:telegram-alt' },
         { name: 'Behance Portfolio', url: 'https://www.behance.net/olzhasgabdullin', icon: 'ph:behance-logo-light' },
         { name: 'LinkedIn Profile', url: 'https://www.linkedin.com/in/olzhas-gabdullin-87aa7123b/', icon: 'circum:linkedin' },
         { name: 'YouTube', url: 'https://www.youtube.com/@oljawave', icon: 'ph:youtube-logo-light' }
       ],
       telegramLink: { name: 'Telegram', url: 'https://t.me/oljawave', icon: 'uit:telegram-alt' },
       blogPosts: [
-      { id: 1, text: 'Music is the only language I spoke fluently this year', image: 'blog/fourth.JPEG', date: '16:19 • Mar 27, 2025' },
+      { id: 1, text: 'Music is the only language I spoke fluently last year', image: 'blog/fourth.JPEG', date: '16:19 • Mar 27, 2025' },
         {
           id: 1,
           text: `<h3 style="margin-bottom: 10px;">Being Bold or Being Wise?</h3>
