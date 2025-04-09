@@ -92,6 +92,12 @@ export default {
       ],
       telegramLink: { name: 'Telegram', url: 'https://t.me/oljawave', icon: 'uit:telegram-alt' },
       blogPosts: [
+      { 
+        id: 1, 
+        text: "Music, Telegram, a bit of LinkedIn. A bit of reality in the screen, a bit of me in the stream. And even if I wanted to spend more, I couldn’t. The screen gets tired of my face too.", 
+        image: "blog/fifth.jpg", 
+        date: "19:46 • Apr 05, 2025" 
+      },
       { id: 1, text: 'Music is the only language I spoke fluently last year', image: 'blog/fourth.JPEG', date: '16:19 • Mar 27, 2025' },
         {
           id: 1,
