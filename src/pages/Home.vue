@@ -12,15 +12,24 @@
     </div>
 
     <div class="links" v-if="activeTab === 'links'">
-      <div v-for="(link, index) in filteredLinks" :key="link.name"
-           :class="['link-item', { 'first': index === 0, 'last': index === filteredLinks.length - 1 }]">
-        <router-link v-if="link.internal" :to="link.url" class="link">
+      <div
+        v-for="(link, index) in filteredLinks"
+        :key="link.name"
+        :class="['link-item', { first: index === 0, last: index === filteredLinks.length - 1 }]"
+      >
+        <router-link
+          v-if="link.internal"
+          :to="link.url"
+          class="link"
+          @click.prevent="handleInternalLinkClick(link)"
+        >
           <div class="link-content">
             <Icon :icon="link.icon" width="24" height="24" class="icon" />
             <span class="link-text">{{ link.name }}</span>
           </div>
           <Icon icon="lets-icons:expand-right-light" width="24" height="24" class="arrow" />
         </router-link>
+
         <a v-else :href="link.url" target="_blank">
           <div class="link-content">
             <Icon :icon="link.icon" width="24" height="24" class="icon" />
@@ -45,15 +54,17 @@
 
     <div class="blog" v-if="activeTab === 'blog'">
       <div v-for="post in blogPosts" :key="post.id" class="blog-post">
-        <img v-if="post.image" 
-             :src="`${baseURL}${post.image}`" 
-             alt="Post Image" 
-             class="post-image" 
-             @click="openModal(post.image)" />
-             <div class="post-content">
-              <p v-html="post.text"></p>
-              <p class="post-date">{{ post.date }}</p>
-            </div>
+        <img
+          v-if="post.image"
+          :src="`${baseURL}${post.image}`"
+          alt="Post Image"
+          class="post-image"
+          @click="openModal(post.image)"
+        />
+        <div class="post-content">
+          <p v-html="post.text"></p>
+          <p class="post-date">{{ post.date }}</p>
+        </div>
       </div>
     </div>
 
@@ -84,7 +95,7 @@ export default {
       modalImage: null,
       links: [
         { name: 'Gallery', url: '/gallery', icon: 'lets-icons:img-box-duotone-line', internal: true },
-        { name: 'My Ratings', url: '/ratings', icon: 'lets-icons:fire-light', internal: true  },
+        { name: 'My Ratings', url: '/ratings', icon: 'lets-icons:fire-light', internal: true },
         { name: 'Telegram Channel', url: 'https://t.me/oljawavetime', icon: 'uit:telegram-alt' },
         { name: 'Behance Portfolio', url: 'https://www.behance.net/olzhasgabdullin', icon: 'ph:behance-logo-light' },
         { name: 'LinkedIn Profile', url: 'https://www.linkedin.com/in/olzhas-gabdullin-87aa7123b/', icon: 'circum:linkedin' },
@@ -92,13 +103,18 @@ export default {
       ],
       telegramLink: { name: 'Telegram', url: 'https://t.me/oljawave', icon: 'uit:telegram-alt' },
       blogPosts: [
-      { 
-        id: 1, 
-        text: "Music, Telegram, a bit of LinkedIn. A bit of reality in the screen, a bit of me in the stream. And even if I wanted to spend more, I couldn’t. The screen gets tired of my face too.", 
-        image: "blog/fifth.jpg", 
-        date: "19:46 • Apr 05, 2025" 
-      },
-      { id: 1, text: 'Music is the only language I spoke fluently last year', image: 'blog/fourth.JPEG', date: '16:19 • Mar 27, 2025' },
+        {
+          id: 1,
+          text: "Music, Telegram, a bit of LinkedIn. A bit of reality in the screen, a bit of me in the stream. And even if I wanted to spend more, I couldn’t. The screen gets tired of my face too.",
+          image: "blog/fifth.jpg",
+          date: "19:46 • Apr 05, 2025"
+        },
+        {
+          id: 1,
+          text: 'Music is the only language I spoke fluently last year',
+          image: 'blog/fourth.JPEG',
+          date: '16:19 • Mar 27, 2025'
+        },
         {
           id: 1,
           text: `<h3 style="margin-bottom: 10px;">Being Bold or Being Wise?</h3>
@@ -110,9 +126,19 @@ export default {
           image: 'blog/third.jpg',
           date: '21:09 • Mar 24, 2025'
         },
-        { id: 1, text: 'Astana is a city where the wind blows away the unnecessary, leaving only the essential. Here, the past can’t keep up with the present, and the future is already under construction. The cold teaches resilience, while the endless sky inspires dreams. Perhaps Astana is not just a place, but a state of mind.', image: 'blog/second.jpg', date: '04:46 • Mar 21, 2025' },
-        { id: 1, text: 'The Golden Horde did not build walls—it conquered space. Empires vanish, but the ideas born in the steppe live on for centuries.  ', image: 'blog/first.jpg', date: '19:57 • Mar 20, 2025' },
-        { id: 2, text: 'Welcome to my personal profile', date: '11:21 • Mar 19, 2025' },
+        {
+          id: 1,
+          text: 'Astana is a city where the wind blows away the unnecessary, leaving only the essential. Here, the past can’t keep up with the present, and the future is already under construction. The cold teaches resilience, while the endless sky inspires dreams. Perhaps Astana is not just a place, but a state of mind.',
+          image: 'blog/second.jpg',
+          date: '04:46 • Mar 21, 2025'
+        },
+        {
+          id: 1,
+          text: 'The Golden Horde did not build walls—it conquered space. Empires vanish, but the ideas born in the steppe live on for centuries.  ',
+          image: 'blog/first.jpg',
+          date: '19:57 • Mar 20, 2025'
+        },
+        { id: 2, text: 'Welcome to my personal profile', date: '11:21 • Mar 19, 2025' }
       ]
     };
   },
@@ -127,10 +153,33 @@ export default {
     },
     closeModal() {
       this.modalImage = null;
+    },
+    handleInternalLinkClick(link) {
+      if (link.name === 'Gallery') {
+        this.sendTelegramMessage('User clicked on Gallery 🚀');
+      }
+      this.$router.push(link.url);
+    },
+    async sendTelegramMessage(message) {
+      const token = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
+      const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
+
+      const url = `https://api.telegram.org/bot${token}/sendMessage`;
+      await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message
+        })
+      });
     }
   }
 };
 </script>
+
 
 <style>
 * {
