@@ -104,6 +104,18 @@ export default {
       telegramLink: { name: 'Telegram', url: 'https://t.me/oljawave', icon: 'uit:telegram-alt' },
       blogPosts: [
         {
+          id: 2,
+          text: `<h3 style="margin-bottom: 10px;">The Gift of Youth</h3>
+                <p>Youth is the time to fall, to stumble, to try again.</p>
+                <p>We’re not supposed to have it all figured out. Mistakes aren’t always victories — sometimes they hurt. But they shape us, push us, teach us.</p>
+                <p>Take risks. Love deeply. Learn loudly. Because the greatest regret isn’t in messing up — it’s in never trying at all.</p>
+                <p>But don’t waste your youth on smoke-filled rooms, cheap thrills, and nights you’ll forget. Life has more to offer than empty escapes.</p>
+                <p>Build something. Discover yourself. Dream without limits.</p>
+                <p><i>Youth is a beautiful chaos. Embrace it — don’t escape it.</i></p>`,
+          image: 'blog/six.jpg',
+          date: '17:48 • May 6, 2025'
+        },
+        {
           id: 1,
           text: "Music, Telegram, a bit of LinkedIn. A bit of reality in the screen, a bit of me in the stream. And even if I wanted to spend more, I couldn’t. The screen gets tired of my face too.",
           image: "blog/fifth.jpg",
