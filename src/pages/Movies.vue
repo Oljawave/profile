@@ -64,9 +64,9 @@
           },
           {
             category: "Cult Masterpieces:",
-            winner: "Schindler’s List",
-            others: ["The Godfather", "Pulp Fiction", "Fight Club", "Forrest Gump / The Green Mile"],
-            image: "rating/schindlers.jpg",
+            winner: "The Shawshank Redemption",
+            others: ["Schindler’s List", "The Godfather", "Pulp Fiction", "Fight Club", "Forrest Gump / The Green Mile"],
+            image: "rating/shawshank.png",
           },
           {
             category: "Dramas and Biographies:",
@@ -77,7 +77,7 @@
           {
             category: "Thrillers and Crime dramas:",
             winner: "Goodfellas",
-            others: ["The Departed", "Prisoners", "Seven / Zodiac", "Slevin / The Usual Suspects"],
+            others: ["The Departed", "Prisoners", "Seven / Zodiac", "Slevin / The Usual Suspects", "Snatch", "RocknRolla"],
             image: "rating/goodfellas.jpg",
           },
           {
@@ -101,7 +101,7 @@
           {
             category: "Comedy and light films:",
             winner: "The Nice Guys",
-            others: ["The Hangover", "Once Upon a Time in Hollywood", "Rush Hour / Deadpool", "Superbad", "Grown Ups / Vacation","Dumb and Dumber / We’re the Millers"],
+            others: ["The Hangover", "Once Upon a Time in Hollywood", "Rush Hour / Deadpool", "Superbad", "Grown Ups / Vacation", "Dumb and Dumber / We’re the Millers", "American Pie"],
             image: "rating/nice.jpg",
           },
           {
@@ -137,7 +137,7 @@
           {
             category: "Best Action-Packed movie:",
             winner: "The Dark Knight",
-            others: ["John Wick", "Django Unchained", "Gladiator", "Heat"],
+            others: ["John Wick", "Django Unchained", "Gladiator", "Heat", "Cold Pursuit"],
             image: "rating/batman.jpg",
           },
           {
@@ -161,20 +161,56 @@
           {
             category: "Best fantasy OAT:",
             winner: "Hobbit",
-            others: ["Lord of the Rings / Avatar", "Blade Runner 2049", "The Matrix / Dune","Ready Player One"],
+            others: ["Lord of the Rings / Avatar", "Blade Runner 2049", "The Matrix / Dune", "Ready Player One"],
             image: "rating/hobbit.jpg",
           },
           {
             category: "Best War film:",
             winner: "Inglourious Basterds",
-            others: ["Hacksaw Ridge", "Dunkirk / 1917", "Saving Private Ryan","Edge of Tomorrow"],
+            others: ["Hacksaw Ridge", "Dunkirk / 1917", "Saving Private Ryan", "Apocalypse Now"],
             image: "rating/inglourious.jpg",
           },
           {
             category: "Best Adventure film:",
             winner: "Pirates of the Caribbean",
-            others: ["The Green Book", "Mad Max", "Indiana Jones","Annihilation"],
+            others: ["The Green Book", "Mad Max", "Indiana Jones", "Annihilation"],
             image: "rating/pirates.jpeg",
+          },
+          {
+            category: "Best Revenge and Cold Justice Films:",
+            winner: "Cold Pursuit",
+            others: ["Taken", "The Equalizer", "Law Abiding Citizen", "Man on Fire"],
+            image: "rating/coldpursuit.jpg",
+          },
+          {
+            category: "Best Gangster and British Crime Films:",
+            winner: "Snatch",
+            others: ["Lock, Stock and Two Smoking Barrels", "RocknRolla", "Layer Cake", "The Gentlemen"],
+            image: "rating/snatch.jpg",
+          },
+          {
+            category: "Time Travel & Sci-Fi Adventure:",
+            winner: "Back to the Future",
+            others: ["Looper", "Edge of Tomorrow", "Source Code", "The Butterfly Effect"],
+            image: "rating/backtothefuture.png",
+          },
+          {
+            category: "Psychological and Mind-Bending Films:",
+            winner: "Requiem for a Dream",
+            others: ["Memento", "The Truman Show", "A Clockwork Orange", "The Shining"],
+            image: "rating/requiem.jpg",  
+          },
+          {
+            category: "Inspirational and Life Stories:",
+            winner: "Good Will Hunting",
+            others: ["The Truman Show", "Cast Away", "The Pursuit of Happyness", "Life Is Beautiful"],
+            image: "rating/goodwill.jpg",
+          },
+          {
+            category: "Best Kazakh Films:",
+            winner: "Myn Bala: Warriors of the Steppe",
+            others: ["The Road to Mother", "The Crying Steppe", "Tomiris", "The Fall of Otrar"],
+            image: "rating/mynbala.png",
           },
         ],
       };

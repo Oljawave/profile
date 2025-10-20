@@ -107,7 +107,7 @@
           {
             category: "Best Story-driven animation:",
             winner: "Avatar: The Last Airbender",
-            others: ["The Legend of Korra"],
+            others: ["The Legend of Korra", "Arcane"],
             image: "rating/avatar.jpg",
           },
           {

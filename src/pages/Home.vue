@@ -62,7 +62,7 @@
           @click="openModal(post.image)"
         />
         <div class="post-content">
-          <p v-html="post.text"></p>
+          <div v-html="post.text" class="post-text-content"></div>
           <p class="post-date">{{ post.date }}</p>
         </div>
       </div>
@@ -101,8 +101,14 @@ export default {
         { name: 'LinkedIn Profile', url: 'https://www.linkedin.com/in/olzhas-gabdullin-87aa7123b/', icon: 'circum:linkedin' },
         { name: 'YouTube', url: 'https://www.youtube.com/@oljawave', icon: 'ph:youtube-logo-light' }
       ],
-      telegramLink: { name: 'Telegram', url: 'https://t.me/oljawave', icon: 'uit:telegram-alt' },
+      telegramLink: { name: 'Telegram', url: 'https://t.me/ocnjandres', icon: 'uit:telegram-alt' },
       blogPosts: [
+        {
+          id: 2,
+          text: 'Man, Back to the Future is just pure movie magic. No superheroes, no crazy CGI — just a kid, a mad scientist, and a time-traveling car that somehow feels cooler than anything today. It’s fun, it’s wild, and it still hits every single time. 1.21 gigawatts of pure joy',
+          image: 'blog/seven.jpg',
+          date: '11:47 • Oct 12, 2025'
+        },
         {
           id: 2,
           text: `<h3 style="margin-bottom: 10px;">The Gift of Youth</h3>
@@ -265,7 +271,7 @@ html, body {
 .link-item:first-child {
   border-radius: 12px 12px 0 0;
 }
-.link-item:last-child {
+.link-item.last {
   border-radius: 0 0 12px 12px;
   border-bottom: 12px solid #222;
 }
@@ -322,6 +328,13 @@ html, body {
 .post-content {
   padding: 12px;
   text-align: left;
+}
+
+.post-text-content {
+  margin-bottom: 8px;
+}
+.post-text-content p {
+  font-weight: 300;
 }
 
 .post-text {
