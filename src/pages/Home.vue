@@ -104,6 +104,12 @@ export default {
       telegramLink: { name: 'Telegram', url: 'https://t.me/ocnjandres', icon: 'uit:telegram-alt' },
       blogPosts: [
         {
+          "id": 8,
+          "text": "<p>And all of it because we want to show others how good we are, how clever, how special. You can fear me, or respect me, but please, consider me special.</p>\n                <p>We all share the same addiction. We are addicted to the drug of approval. We are ready to do anything to get a clap on the back and a cry of 'hip hip hooray!'</p>\n                <p>Look at the clever little boy who won another medal, and now he is polishing his favourite cup until it shines. We are just monkeys in suits, begging for the approval of others. If we understood this, we wouldn't do it, but someone is hiding the truth from us.</p>",
+          "image": "blog/eight.jpg",
+          "date": "2:09 • December 6, 2025"
+        },
+        {
           id: 2,
           text: 'Man, Back to the Future is just pure movie magic. No superheroes, no crazy CGI — just a kid, a mad scientist, and a time-traveling car that somehow feels cooler than anything today. It’s fun, it’s wild, and it still hits every single time. 1.21 gigawatts of pure joy',
           image: 'blog/seven.jpg',
