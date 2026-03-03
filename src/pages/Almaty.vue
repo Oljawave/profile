@@ -6,23 +6,34 @@
     </div>
     
     <div class="photo-grid">
-      <div v-for="(photo, index) in photos" :key="index" class="photo-item" @click="openPhoto(photo.src)">
-        <!-- Заглушка, пока изображение загружается -->
+      <div
+        v-for="(photo, index) in photos"
+        :key="index"
+        :class="['photo-item', { 'full-width': isFullWidth(index) }]"
+        @click="openPhoto(index)"
+      >
         <div v-if="photo.loading" class="placeholder"></div>
-        
-        <!-- Основное изображение -->
-        <img 
+        <img
           v-show="!photo.loading"
-          :src="photo.src" 
-          :alt="photo.title" 
+          :src="photo.src"
+          :alt="photo.title"
           @load="photo.loading = false"
         />
       </div>
     </div>
 
-    <!-- Модальное окно для увеличенного изображения -->
-    <div v-if="selectedPhoto" class="modal" @click="selectedPhoto = null">
-      <img :src="selectedPhoto" class="modal-img" />
+    <div v-if="selectedIndex !== null" class="modal" @click="closeModal">
+      <button class="modal-close" @click.stop="closeModal">×</button>
+
+      <button class="modal-arrow modal-arrow-left" @click.stop="prevPhoto">
+        <Icon icon="lets-icons:expand-left-light" width="28" height="28" />
+      </button>
+
+      <img :src="photos[selectedIndex].src" class="modal-img" @click.stop />
+
+      <button class="modal-arrow modal-arrow-right" @click.stop="nextPhoto">
+        <Icon icon="lets-icons:expand-right-light" width="28" height="28" />
+      </button>
     </div>
 
     <button v-show="showScrollTop" class="scroll-top-btn" @click="scrollToTop">
@@ -47,7 +58,7 @@ data() {
       title: `Photo ${i + 1}`,
       loading: true,
     })),
-    selectedPhoto: null,
+    selectedIndex: null,
     showScrollTop: false,
   };
 },
@@ -55,8 +66,20 @@ methods: {
   goBack() {
     this.$router.go(-1);
   },
-  openPhoto(src) {
-    this.selectedPhoto = src;
+  openPhoto(index) {
+    this.selectedIndex = index;
+  },
+  closeModal() {
+    this.selectedIndex = null;
+  },
+  prevPhoto() {
+    this.selectedIndex = (this.selectedIndex - 1 + this.photos.length) % this.photos.length;
+  },
+  nextPhoto() {
+    this.selectedIndex = (this.selectedIndex + 1) % this.photos.length;
+  },
+  isFullWidth(index) {
+    return (index + 1) % 3 === 0;
   },
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -114,7 +137,7 @@ transform: scale(1.2);
 .photo-grid {
 display: grid;
 grid-template-columns: repeat(2, 1fr);
-gap: 10px;
+gap: 3px;
 max-width: 400px;
 margin: 0 auto;
 }
@@ -122,27 +145,27 @@ margin: 0 auto;
 .photo-item {
 position: relative;
 width: 100%;
-height: 200px;
+height: 190px;
+}
+
+.photo-item.full-width {
+grid-column: 1 / -1;
+height: 440px;
 }
 
 .photo-item img {
 width: 100%;
 height: 100%;
-border-radius: 12px;
+border-radius: 0;
 cursor: pointer;
 object-fit: cover;
-transition: transform 0.3s ease;
-}
-
-.photo-item img:hover {
-transform: scale(1.05);
 }
 
 /* Заглушка (плейсхолдер) */
 .placeholder {
 width: 100%;
 height: 100%;
-border-radius: 12px;
+border-radius: 0;
 background: #333;
 animation: pulse 1.5s infinite;
 }
@@ -170,11 +193,60 @@ z-index: 1000;
 max-width: 90%;
 max-height: 90%;
 border-radius: 12px;
-transition: transform 0.3s ease;
 }
 
-.modal:hover .modal-img {
-transform: scale(1.05);
+.modal-close {
+position: absolute;
+top: 56px;
+right: 16px;
+width: 40px;
+height: 40px;
+background: rgba(255, 255, 255, 0.15);
+border: none;
+border-radius: 50%;
+color: white;
+font-size: 24px;
+line-height: 1;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: background 0.2s;
+z-index: 10;
+}
+
+.modal-close:hover {
+background: rgba(255, 255, 255, 0.35);
+}
+
+.modal-arrow {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+width: 44px;
+height: 44px;
+background: rgba(255, 255, 255, 0.12);
+border: none;
+border-radius: 50%;
+color: white;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: background 0.2s;
+z-index: 10;
+}
+
+.modal-arrow:hover {
+background: rgba(255, 255, 255, 0.3);
+}
+
+.modal-arrow-left {
+left: 16px;
+}
+
+.modal-arrow-right {
+right: 16px;
 }
 
 .scroll-top-btn {
