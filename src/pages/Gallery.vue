@@ -6,7 +6,7 @@
       </div>
   
       <div class="image-list">
-        <div v-for="(item, index) in images" :key="index" class="image-item" @click="goToPage(item.route)">
+        <div v-for="(item, index) in images" :key="index" class="image-item" @click="goToPage(item.route, item.title)">
           <img :src="item.src" :alt="item.title" />
         </div>
       </div>
@@ -51,14 +51,23 @@
       };
     },
     methods: {
-      goToPage(route) {
+      goToPage(route, title) {
         sessionStorage.setItem("scrollPosition", window.scrollY);
-  
+        this.sendTelegramMessage(`User opened ${title} 📸`);
         if (route.startsWith("http")) {
           window.location.href = route;
         } else {
           this.$router.push(route);
         }
+      },
+      async sendTelegramMessage(message) {
+        const token = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
+        const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
+        await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id: chatId, text: message })
+        });
       },
       goBack() {
         this.$router.go(-1);

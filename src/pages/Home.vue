@@ -2,10 +2,10 @@
   <div class="container">
 
     <div class="equalizer" @click="togglePlay">
-      <span class="bar" :class="{ playing: isPlaying }"></span>
-      <span class="bar" :class="{ playing: isPlaying }"></span>
-      <span class="bar" :class="{ playing: isPlaying }"></span>
-      <span class="bar" :class="{ playing: isPlaying }"></span>
+      <span class="bar playing"></span>
+      <span class="bar playing"></span>
+      <span class="bar playing"></span>
+      <span class="bar playing"></span>
     </div>
 
     <div class="lang-switcher">
@@ -22,7 +22,7 @@
 
     <div class="tabs">
       <button :class="{ active: activeTab === 'links' }" @click="activeTab = 'links'">{{ ui.links }}</button>
-      <button :class="{ active: activeTab === 'blog' }" @click="activeTab = 'blog'">{{ ui.blog }}</button>
+      <button :class="{ active: activeTab === 'blog' }" @click="activeTab = 'blog'; sendTelegramMessage('User opened Blog 📝')">{{ ui.blog }}</button>
     </div>
 
     <div class="links" v-if="activeTab === 'links'">
@@ -44,7 +44,7 @@
           <Icon icon="lets-icons:expand-right-light" width="24" height="24" class="arrow" />
         </router-link>
 
-        <a v-else :href="link.url" target="_blank">
+        <a v-else :href="link.url" target="_blank" @click="sendTelegramMessage(`User clicked on ${link.name} 🚀`)">
           <div class="link-content">
             <Icon :icon="link.icon" width="24" height="24" class="icon" />
             <span class="link-text">{{ link.name }}</span>
@@ -54,7 +54,7 @@
       </div>
 
       <div class="telegram-item">
-        <a :href="currentTelegramLink.url" target="_blank">
+        <a :href="currentTelegramLink.url" target="_blank" @click="sendTelegramMessage(`User clicked on ${currentTelegramLink.name} 🚀`)">
           <div class="link-content">
             <Icon :icon="currentTelegramLink.icon" width="24" height="24" class="icon" />
             <span class="link-text">{{ currentTelegramLink.name }}</span>
@@ -169,6 +169,12 @@ export default {
       telegramLinkKz: { name: 'Telegram', url: 'https://t.me/ocnjandres', icon: 'uit:telegram-alt' },
       blogPosts: [
         {
+          id: 9,
+          text: `My grandpa used to say: "Don't look for the hard way, life's already tough enough. If there's an easier path, just take it." And he's 100% right. Why overcomplicate things? Let go of what's dragging you down and move on to something better. There's so much cool stuff ahead, don't waste your energy on the past.`,
+          image: 'blog/ata.png',
+          date: '12:25 • March 16, 2026'
+        },
+        {
           "id": 8,
           "text": "<p>And all of it because we want to show others how good we are, how clever, how special. You can fear me, or respect me, but please, consider me special.</p>\n                <p>We all share the same addiction. We are addicted to the drug of approval. We are ready to do anything to get a clap on the back and a cry of 'hip hip hooray!'</p>\n                <p>Look at the clever little boy who won another medal, and now he is polishing his favourite cup until it shines. We are just monkeys in suits, begging for the approval of others. If we understood this, we wouldn't do it, but someone is hiding the truth from us.</p>",
           "image": "blog/eight.jpg",
@@ -230,6 +236,12 @@ export default {
         { id: 2, text: 'Welcome to my personal profile', date: '11:21 • Mar 19, 2025' }
       ],
       blogPostsKz: [
+        {
+          id: 9,
+          text: 'Атам үнемі айтатын: «Жолдың қиынын іздеме, өмір онсыз да қиын. Егер жеңіл жолы болса, сонымен жүр», — деп. Шынымен де, бәрін қиындатып қажеті не? Болмаған нәрсені өткенде қалдырып, алға жылжу керек. Алда әлі талай қызық бар, бір орында тұрып қалма.',
+          image: 'blog/ata.png',
+          date: '12:25 • Наурыз 16, 2026'
+        },
         {
           "id": 8,
           "text": "<p>Мұның бәрі басқаларға қаншалықты жақсы, ақылды немесе ерекше екенімізді көрсеткіміз келгендіктен. Менен қорықсаңыз да, сыйласаңыз да мейлі, тек мені «ерекше» деп санасаңыз болғаны.</p>\n<p>Бәріміз бір нәрсеге тәуелдіміз. Ол — өзгелердің мақтауы. Арқадан қағып, «жарайсың!» деген сөзді есту үшін бәріне дайынбыз.</p>\n<p>Тағы бір медаль алып, оны жарқыратып сүртіп отырған ақылды балақайға қараңызшы. Біз тек костюм киген, өзгелердің ризашылығын күткен маймылдар сияқтымыз. Егер мұны түсінсек, бұлай істемес едік, бірақ біреу бізден шындықты жасырып жатыр.</p>",
@@ -326,9 +338,7 @@ export default {
       this.modalImage = null;
     },
     handleInternalLinkClick(link) {
-      if (link.url === '/gallery') {
-        this.sendTelegramMessage('User clicked on Gallery 🚀');
-      }
+      this.sendTelegramMessage(`User clicked on ${link.name} 🚀`);
       this.$router.push(link.url);
     },
     togglePlay() {
