@@ -169,6 +169,18 @@ export default {
       telegramLinkKz: { name: 'Telegram', url: 'https://t.me/ocnjandres', icon: 'uit:telegram-alt' },
       blogPosts: [
         {
+          id: 10,
+          text: `<p>We so often put life off for later. We think: "I'll do it later", "now's not the time", "someday". And there seem to be reasons, but honestly — most of the time it's just fear. Fear of disappointing someone, not living up to expectations, looking stupid, or being judged.</p>
+                <p>Because of this, we make things harder for ourselves. We set limits, create boundaries nobody asked us to create. We wait for some perfect moment when we'll be "ready enough". But it may never come.</p>
+                <p>And yet nobody knows how much time we actually have.</p>
+                <p>So sometimes you just have to do it. Not perfectly, not with every detail figured out — just as it comes. Try, even when it's scary. Go where you want to go, not where you "have to".</p>
+                <p>Didn't work out? Okay, you move on. That's normal.</p>
+                <p>Far worse is never trying at all.</p>
+                <p>So don't put it off. Live now, enjoy now. Because "later" might never come.</p>`,
+          image: 'blog/nine.jpeg',
+          date: '14:00 • April 21, 2026'
+        },
+        {
           id: 9,
           text: `My grandpa used to say: "Don't look for the hard way, life's already tough enough. If there's an easier path, just take it." And he's 100% right. Why overcomplicate things? Let go of what's dragging you down and move on to something better. There's so much cool stuff ahead, don't waste your energy on the past.`,
           image: 'blog/ata.png',
@@ -236,6 +248,18 @@ export default {
         { id: 2, text: 'Welcome to my personal profile', date: '11:21 • Mar 19, 2025' }
       ],
       blogPostsKz: [
+        {
+          id: 10,
+          text: `<p>Өмірді жиі ертеңге қалдырамыз. «Кейін жасармын», «қазір уақыты емес», «бір күні» деп ойлаймыз. Себептер бар сияқты, бірақ шынын айтсақ — көбінесе бұл жай ғана қорқыныш. Біреуді көңілін қалдырудан, үмітті ақтамаудан, ақымақ болып көрінуден немесе сын естуден қорқу.</p>
+                <p>Осыдан біз өзімізге бәрін қиындатамыз. Ешкім сұрамаса да шектеулер қоямыз, шеңберлер ойлап табамыз. «Жеткілікті дайын» боламыз деген бір керемет сәтті күтеміз. Ал ол сәт мүлде келмеуі мүмкін.</p>
+                <p>Сонымен қатар ешкім бізде қанша уақыт бар екенін білмейді.</p>
+                <p>Сондықтан кейде жай ғана жасау керек. Мінсіз емес, бәрін ойластырмай — қалай шықса солай. Қорқынышты болса да, байқап көру керек. «Қажет» жерге емес, қалаған жеріңе бару керек.</p>
+                <p>Шықпады ма? Жарайды, алға жүресің. Бұл қалыпты.</p>
+                <p>Мүлде байқап та көрмеу — одан да жаман.</p>
+                <p>Сондықтан кейінге қалдырма. Қазір өмір сүр, қазір қуан. Өйткені «кейін» мүлде келмеуі мүмкін.</p>`,
+          image: 'blog/nine.jpeg',
+          date: '14:00 • Сәуір 21, 2026'
+        },
         {
           id: 9,
           text: 'Атам үнемі айтатын: «Жолдың қиынын іздеме, өмір онсыз да қиын. Егер жеңіл жолы болса, сонымен жүр», — деп. Шынымен де, бәрін қиындатып қажеті не? Болмаған нәрсені өткенде қалдырып, алға жылжу керек. Алда әлі талай қызық бар, бір орында тұрып қалма.',
