@@ -17,8 +17,52 @@
     </div>
 
     <div class="profile">
-      <div class="avatar-ring">
-        <img src="/src/assets/profile.png" alt="Profile" class="avatar" />
+      <div class="avatar-container">
+        <div class="dragonfly-field">
+          <!-- крылья вверх-вниз от тела, как настоящая стрекоза сверху -->
+          <div class="dragonfly df1">
+            <svg class="df-svg" viewBox="0 0 72 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g class="wings">
+                <ellipse cx="20" cy="12" rx="8" ry="12" transform="rotate(-18 20 12)" stroke="white" stroke-width="0.9" fill="rgba(255,255,255,0.11)"/>
+                <ellipse cx="20" cy="38" rx="8" ry="12" transform="rotate(18 20 38)"  stroke="white" stroke-width="0.9" fill="rgba(255,255,255,0.11)"/>
+                <ellipse cx="29" cy="14" rx="6.5" ry="10" transform="rotate(-12 29 14)" stroke="white" stroke-width="0.75" fill="rgba(255,255,255,0.07)"/>
+                <ellipse cx="29" cy="36" rx="6.5" ry="10" transform="rotate(12 29 36)"  stroke="white" stroke-width="0.75" fill="rgba(255,255,255,0.07)"/>
+              </g>
+              <circle cx="7" cy="25" r="4.5" fill="white"/>
+              <ellipse cx="20" cy="25" rx="7.5" ry="4.5" fill="white"/>
+              <line x1="27" y1="25" x2="69" y2="25" stroke="white" stroke-width="2.4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="dragonfly df2">
+            <svg class="df-svg" viewBox="0 0 72 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g class="wings">
+                <ellipse cx="20" cy="12" rx="8" ry="12" transform="rotate(-18 20 12)" stroke="white" stroke-width="0.9" fill="rgba(255,255,255,0.11)"/>
+                <ellipse cx="20" cy="38" rx="8" ry="12" transform="rotate(18 20 38)"  stroke="white" stroke-width="0.9" fill="rgba(255,255,255,0.11)"/>
+                <ellipse cx="29" cy="14" rx="6.5" ry="10" transform="rotate(-12 29 14)" stroke="white" stroke-width="0.75" fill="rgba(255,255,255,0.07)"/>
+                <ellipse cx="29" cy="36" rx="6.5" ry="10" transform="rotate(12 29 36)"  stroke="white" stroke-width="0.75" fill="rgba(255,255,255,0.07)"/>
+              </g>
+              <circle cx="7" cy="25" r="4.5" fill="white"/>
+              <ellipse cx="20" cy="25" rx="7.5" ry="4.5" fill="white"/>
+              <line x1="27" y1="25" x2="69" y2="25" stroke="white" stroke-width="2.4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="dragonfly df3">
+            <svg class="df-svg" viewBox="0 0 72 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g class="wings">
+                <ellipse cx="20" cy="12" rx="8" ry="12" transform="rotate(-18 20 12)" stroke="white" stroke-width="0.9" fill="rgba(255,255,255,0.11)"/>
+                <ellipse cx="20" cy="38" rx="8" ry="12" transform="rotate(18 20 38)"  stroke="white" stroke-width="0.9" fill="rgba(255,255,255,0.11)"/>
+                <ellipse cx="29" cy="14" rx="6.5" ry="10" transform="rotate(-12 29 14)" stroke="white" stroke-width="0.75" fill="rgba(255,255,255,0.07)"/>
+                <ellipse cx="29" cy="36" rx="6.5" ry="10" transform="rotate(12 29 36)"  stroke="white" stroke-width="0.75" fill="rgba(255,255,255,0.07)"/>
+              </g>
+              <circle cx="7" cy="25" r="4.5" fill="white"/>
+              <ellipse cx="20" cy="25" rx="7.5" ry="4.5" fill="white"/>
+              <line x1="27" y1="25" x2="69" y2="25" stroke="white" stroke-width="2.4" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="avatar-ring">
+          <img src="/src/assets/profile.png" alt="Profile" class="avatar" />
+        </div>
       </div>
       <h2 class="profile-name">Gabdullin Olzhas</h2>
       <p class="profile-handle">@oljawave</p>
@@ -563,14 +607,122 @@ html, body {
   margin-bottom: 24px;
 }
 
+.avatar-container {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 14px;
+  overflow: visible;
+}
+
+.dragonfly-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.dragonfly {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.df1 {
+  width: 68px;
+  height: 47px;
+  margin-left: -34px;
+  margin-top: -24px;
+  opacity: 0.62;
+  animation: df-fly-1 9s ease-in-out infinite;
+}
+
+.df2 {
+  width: 58px;
+  height: 40px;
+  margin-left: -29px;
+  margin-top: -20px;
+  opacity: 0.5;
+  animation: df-fly-2 7s ease-in-out infinite 2.2s;
+}
+
+.df3 {
+  width: 50px;
+  height: 35px;
+  margin-left: -25px;
+  margin-top: -18px;
+  opacity: 0.56;
+  animation: df-fly-3 11s ease-in-out infinite 4.5s;
+}
+
+.df-svg { display: block; width: 100%; height: 100%; }
+
+.wings {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: wingflap 0.18s linear infinite;
+}
+
+@keyframes wingflap {
+  0%, 100% { transform: scaleY(1); }
+  50%       { transform: scaleY(0.08); }
+}
+
+@keyframes df-fly-1 {
+  0%   { transform: translate(-10px, -82px) rotate(-30deg); }
+  8%   { transform: translate(42px,  -92px) rotate(12deg);  }
+  20%  { transform: translate(90px,  -12px) rotate(82deg);  }
+  30%  { transform: translate(76px,   22px) rotate(88deg);  }
+  32%  { transform: translate(74px,   26px) rotate(90deg);  }
+  44%  { transform: translate(18px,   80px) rotate(10deg);  }
+  54%  { transform: translate(-52px,  68px) rotate(-62deg); }
+  66%  { transform: translate(-92px,   2px) rotate(-98deg); }
+  76%  { transform: translate(-70px, -30px) rotate(-70deg); }
+  88%  { transform: translate(-28px, -88px) rotate(-28deg); }
+  100% { transform: translate(-10px, -82px) rotate(-30deg); }
+}
+
+@keyframes df-fly-2 {
+  0%   { transform: translate(74px,  -30px) rotate(62deg);  }
+  10%  { transform: translate(22px,   15px) rotate(118deg); }
+  22%  { transform: translate(-58px,  58px) rotate(-128deg);}
+  34%  { transform: translate(-80px,   4px) rotate(-92deg); }
+  44%  { transform: translate(-28px, -65px) rotate(-22deg); }
+  52%  { transform: translate(12px,  -18px) rotate(22deg);  }
+  62%  { transform: translate(80px,  -75px) rotate(38deg);  }
+  74%  { transform: translate(90px,   10px) rotate(78deg);  }
+  86%  { transform: translate(55px,   50px) rotate(50deg);  }
+  93%  { transform: translate(30px,  -10px) rotate(55deg);  }
+  100% { transform: translate(74px,  -30px) rotate(62deg);  }
+}
+
+@keyframes df-fly-3 {
+  0%   { transform: translate(-44px, -74px) rotate(-28deg); }
+  7%   { transform: translate(-80px, -24px) rotate(-78deg); }
+  16%  { transform: translate(-60px,  48px) rotate(-145deg);}
+  26%  { transform: translate(12px,   80px) rotate(12deg);  }
+  34%  { transform: translate(75px,   50px) rotate(72deg);  }
+  40%  { transform: translate(85px,  -14px) rotate(88deg);  }
+  46%  { transform: translate(50px,  -70px) rotate(44deg);  }
+  54%  { transform: translate(8px,   -88px) rotate(2deg);   }
+  62%  { transform: translate(-32px, -76px) rotate(-38deg); }
+  70%  { transform: translate(-74px, -36px) rotate(-72deg); }
+  80%  { transform: translate(-88px,  18px) rotate(-98deg); }
+  90%  { transform: translate(-50px,  62px) rotate(-140deg);}
+  96%  { transform: translate(-20px,  30px) rotate(-50deg); }
+  100% { transform: translate(-44px, -74px) rotate(-28deg); }
+}
+
 .avatar-ring {
+  position: relative;
+  z-index: 1;
   width: 96px;
   height: 96px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 3px;
   background: transparent;
-  margin: 0 auto 14px;
 }
 
 .avatar {
