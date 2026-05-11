@@ -1,11 +1,13 @@
 <template>
   <div class="container">
 
-    <div class="equalizer" @click="togglePlay">
-      <span class="bar playing"></span>
-      <span class="bar playing"></span>
-      <span class="bar playing"></span>
-      <span class="bar playing"></span>
+    <div class="bg-glow"></div>
+
+    <div class="equalizer" @click="togglePlay; showPlayer = true">
+      <span class="bar" :class="{ playing: isPlaying }"></span>
+      <span class="bar" :class="{ playing: isPlaying }"></span>
+      <span class="bar" :class="{ playing: isPlaying }"></span>
+      <span class="bar" :class="{ playing: isPlaying }"></span>
     </div>
 
     <div class="lang-switcher">
@@ -15,9 +17,11 @@
     </div>
 
     <div class="profile">
-      <img src="/src/assets/profile.png" alt="Profile" class="avatar" />
-      <h2>Gabdullin Olzhas</h2>
-      <p style="margin-top: 10px; margin-bottom: 10px; color: #555;">@oljawave</p>
+      <div class="avatar-ring">
+        <img src="/src/assets/profile.png" alt="Profile" class="avatar" />
+      </div>
+      <h2 class="profile-name">Gabdullin Olzhas</h2>
+      <p class="profile-handle">@oljawave</p>
     </div>
 
     <div class="tabs">
@@ -29,52 +33,59 @@
       <div
         v-for="(link, index) in filteredLinks"
         :key="link.name"
-        :class="['link-item', { first: index === 0, last: index === filteredLinks.length - 1 }]"
+        class="link-item"
       >
         <router-link
           v-if="link.internal"
           :to="link.url"
-          class="link"
+          class="link-anchor"
           @click.prevent="handleInternalLinkClick(link)"
         >
           <div class="link-content">
-            <Icon :icon="link.icon" width="24" height="24" class="icon" />
+            <div class="link-icon-wrap">
+              <Icon :icon="link.icon" width="20" height="20" />
+            </div>
             <span class="link-text">{{ link.name }}</span>
           </div>
-          <Icon icon="lets-icons:expand-right-light" width="24" height="24" class="arrow" />
+          <Icon icon="lets-icons:expand-right-light" width="20" height="20" class="arrow" />
         </router-link>
 
-        <a v-else :href="link.url" target="_blank" @click="sendTelegramMessage(`User clicked on ${link.name} 🚀`)">
+        <a v-else :href="link.url" target="_blank" class="link-anchor" @click="sendTelegramMessage(`User clicked on ${link.name} 🚀`)">
           <div class="link-content">
-            <Icon :icon="link.icon" width="24" height="24" class="icon" />
+            <div class="link-icon-wrap">
+              <Icon :icon="link.icon" width="20" height="20" />
+            </div>
             <span class="link-text">{{ link.name }}</span>
           </div>
-          <Icon icon="lets-icons:expand-right-light" width="24" height="24" class="arrow" />
+          <Icon icon="lets-icons:expand-right-light" width="20" height="20" class="arrow" />
         </a>
       </div>
 
-      <div class="telegram-item">
-        <a :href="currentTelegramLink.url" target="_blank" @click="sendTelegramMessage(`User clicked on ${currentTelegramLink.name} 🚀`)">
+      <div class="link-item telegram-item">
+        <a :href="currentTelegramLink.url" target="_blank" class="link-anchor" @click="sendTelegramMessage(`User clicked on ${currentTelegramLink.name} 🚀`)">
           <div class="link-content">
-            <Icon :icon="currentTelegramLink.icon" width="24" height="24" class="icon" />
+            <div class="link-icon-wrap tg-icon">
+              <Icon :icon="currentTelegramLink.icon" width="20" height="20" />
+            </div>
             <span class="link-text">{{ currentTelegramLink.name }}</span>
           </div>
-          <Icon icon="lets-icons:expand-right-light" width="24" height="24" class="arrow" />
+          <Icon icon="lets-icons:expand-right-light" width="20" height="20" class="arrow" />
         </a>
       </div>
 
-      <p style="margin-top: 20px; color: #555;">{{ ui.designedBy }}</p>
+      <p class="designed-by">{{ ui.designedBy }}</p>
     </div>
 
     <div class="blog" v-if="activeTab === 'blog'">
       <div v-for="post in currentBlogPosts" :key="post.id" class="blog-post">
-        <img
-          v-if="post.image"
-          :src="`${baseURL}${post.image}`"
-          alt="Post Image"
-          class="post-image"
-          @click="openModal(post.image)"
-        />
+        <div class="post-image-wrap" v-if="post.image" @click="openModal(post.image)">
+          <img
+            :src="`${baseURL}${post.image}`"
+            alt="Post Image"
+            class="post-image"
+          />
+          <div class="post-image-overlay"></div>
+        </div>
         <div class="post-content">
           <div v-html="post.text" class="post-text-content"></div>
           <p class="post-date">{{ post.date }}</p>
@@ -93,10 +104,8 @@
 
     <router-view />
 
-    <!-- Player overlay -->
     <div v-if="showPlayer" class="player-overlay" @click="showPlayer = false"></div>
 
-    <!-- Player bottom sheet -->
     <transition name="slide-up">
       <div v-if="showPlayer" class="player-modal">
         <div class="player-handle"></div>
@@ -200,7 +209,7 @@ export default {
         },
         {
           id: 2,
-          text: 'Man, Back to the Future is just pure movie magic. No superheroes, no crazy CGI — just a kid, a mad scientist, and a time-traveling car that somehow feels cooler than anything today. It’s fun, it’s wild, and it still hits every single time. 1.21 gigawatts of pure joy',
+          text: 'Man, Back to the Future is just pure movie magic. No superheroes, no crazy CGI — just a kid, a mad scientist, and a time-traveling car that somehow feels cooler than anything today. It\'s fun, it\'s wild, and it still hits every single time. 1.21 gigawatts of pure joy',
           image: 'blog/seven.jpg',
           date: '11:47 • Oct 12, 2025'
         },
@@ -208,17 +217,17 @@ export default {
           id: 2,
           text: `<h3 style="margin-bottom: 10px;">The Gift of Youth</h3>
                 <p>Youth is the time to fall, to stumble, to try again.</p>
-                <p>We’re not supposed to have it all figured out. Mistakes aren’t always victories — sometimes they hurt. But they shape us, push us, teach us.</p>
-                <p>Take risks. Love deeply. Learn loudly. Because the greatest regret isn’t in messing up — it’s in never trying at all.</p>
-                <p>But don’t waste your youth on smoke-filled rooms, cheap thrills, and nights you’ll forget. Life has more to offer than empty escapes.</p>
+                <p>We're not supposed to have it all figured out. Mistakes aren't always victories — sometimes they hurt. But they shape us, push us, teach us.</p>
+                <p>Take risks. Love deeply. Learn loudly. Because the greatest regret isn't in messing up — it's in never trying at all.</p>
+                <p>But don't waste your youth on smoke-filled rooms, cheap thrills, and nights you'll forget. Life has more to offer than empty escapes.</p>
                 <p>Build something. Discover yourself. Dream without limits.</p>
-                <p><i>Youth is a beautiful chaos. Embrace it — don’t escape it.</i></p>`,
+                <p><i>Youth is a beautiful chaos. Embrace it — don't escape it.</i></p>`,
           image: 'blog/six.jpg',
           date: '17:48 • May 6, 2025'
         },
         {
           id: 1,
-          text: "Music, Telegram, a bit of LinkedIn. A bit of reality in the screen, a bit of me in the stream. And even if I wanted to spend more, I couldn’t. The screen gets tired of my face too.",
+          text: "Music, Telegram, a bit of LinkedIn. A bit of reality in the screen, a bit of me in the stream. And even if I wanted to spend more, I couldn't. The screen gets tired of my face too.",
           image: "blog/fifth.jpg",
           date: "19:46 • Apr 05, 2025"
         },
@@ -235,13 +244,13 @@ export default {
                 <p>Boldness drives us toward great achievements, pushing boundaries and opening doors that might otherwise remain closed. But wisdom? Wisdom is the quiet force that helps us navigate uncertainty, avoid unnecessary losses, and make decisions that stand the test of time.</p>
                 <p>Perhaps true mastery lies in balancing both—knowing when to act fearlessly and when to step back and observe.</p>
                 <p><i>Napoleon once said, "The battle is won by the one who makes the fewest mistakes."</i></p>
-                <p>Maybe success isn’t just about courage but also about calculation.</p>`,
+                <p>Maybe success isn't just about courage but also about calculation.</p>`,
           image: 'blog/third.jpg',
           date: '21:09 • Mar 24, 2025'
         },
         {
           id: 1,
-          text: 'Astana is a city where the wind blows away the unnecessary, leaving only the essential. Here, the past can’t keep up with the present, and the future is already under construction. The cold teaches resilience, while the endless sky inspires dreams. Perhaps Astana is not just a place, but a state of mind.',
+          text: 'Astana is a city where the wind blows away the unnecessary, leaving only the essential. Here, the past can\'t keep up with the present, and the future is already under construction. The cold teaches resilience, while the endless sky inspires dreams. Perhaps Astana is not just a place, but a state of mind.',
           image: 'blog/second.jpg',
           date: '04:46 • Mar 21, 2025'
         },
@@ -337,10 +346,10 @@ export default {
           "image": 'blog/first.jpg',
           "date": '19:57 • Нау 20, 2025'
         },
-        { 
-          "id": 2, 
-          "text": 'Жеке профиліме қош келдіңіз!', 
-          "date": '11:21 • Нау 19, 2025' 
+        {
+          "id": 2,
+          "text": 'Жеке профиліме қош келдіңіз!',
+          "date": '11:21 • Нау 19, 2025'
         }
       ]
     };
@@ -438,305 +447,357 @@ export default {
 };
 </script>
 
-
 <style>
 * {
-  font-family: 'SF Pro Display', sans-serif;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 html, body {
-  background: black !important;
+  background: #0a0a0a;
   color: white;
   width: 100%;
   height: 100%;
 }
+
 #app {
-  background: black;
+  background: #0a0a0a;
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
+
 .container {
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   text-align: center;
-  background: black;
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 24px 18px 100px;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   position: relative;
+  z-index: 1;
 }
+
+.bg-glow { display: none; }
+
+/* ─── Equalizer ─── */
 .equalizer {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 26px;
+  left: 24px;
   display: flex;
   align-items: flex-end;
-  gap: 2px;
-  height: 16px;
+  gap: 3px;
+  height: 18px;
   cursor: pointer;
+  z-index: 10;
 }
+
 .bar {
   width: 3px;
   height: 4px;
-  background: white;
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 2px;
-  transition: height 0.3s;
+  transition: background 0.3s;
 }
-.bar.playing { animation: equalize 1s ease-in-out infinite; }
+
+.bar.playing {
+  background: rgba(255, 255, 255, 0.85);
+  animation: equalize 1s ease-in-out infinite;
+}
+
 .bar.playing:nth-child(1) { animation-delay: 0s; }
 .bar.playing:nth-child(2) { animation-delay: 0.2s; }
 .bar.playing:nth-child(3) { animation-delay: 0.35s; }
 .bar.playing:nth-child(4) { animation-delay: 0.1s; }
+
 @keyframes equalize {
   0%, 100% { height: 4px; }
-  50% { height: 14px; }
+  50%       { height: 16px; }
 }
-.player-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 1900;
-}
-.player-modal {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 400px;
-  background: #1a1a1a;
-  border-radius: 20px 20px 0 0;
-  padding: 12px 24px 36px;
-  z-index: 2000;
-}
-.player-handle {
-  width: 36px;
-  height: 4px;
-  background: #444;
-  border-radius: 2px;
-  margin: 0 auto 20px;
-}
-.player-track-info {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 20px;
-}
-.player-cover {
-  width: 52px;
-  height: 52px;
-  border-radius: 8px;
-  object-fit: cover;
-}
-.player-cover-placeholder {
-  width: 52px;
-  height: 52px;
-  border-radius: 8px;
-  background: #333;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #888;
-  flex-shrink: 0;
-}
-.player-meta { text-align: left; }
-.player-title { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
-.player-artist { font-size: 13px; color: #888; }
-.player-progress {
-  width: 100%;
-  accent-color: white;
-  cursor: pointer;
-  margin-bottom: 4px;
-}
-.player-time {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-  color: #666;
-  margin-bottom: 20px;
-}
-.player-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 32px;
-}
-.ctrl-btn {
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-}
-.play-btn {
-  width: 56px;
-  height: 56px;
-  background: white;
-  border-radius: 50%;
-  color: black;
-}
-.slide-up-enter-active, .slide-up-leave-active { transition: transform 0.35s ease; }
-.slide-up-enter-from, .slide-up-leave-to { transform: translateX(-50%) translateY(100%); }
-.slide-up-enter-to, .slide-up-leave-from { transform: translateX(-50%) translateY(0); }
+
+/* ─── Lang switcher ─── */
 .lang-switcher {
   position: absolute;
   top: 20px;
   right: 20px;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 5px 12px;
+  z-index: 10;
 }
+
 .lang-switcher button {
   background: none;
   border: none;
-  color: #555;
-  font-size: 13px;
+  color: rgba(255, 255, 255, 0.28);
+  font-size: 12px;
+  font-weight: 500;
   cursor: pointer;
   padding: 0;
+  letter-spacing: 0.4px;
+  transition: color 0.2s;
 }
+
 .lang-switcher button.lang-active {
-  color: white;
-  font-weight: 700;
+  color: #fff;
+  font-weight: 600;
 }
+
 .lang-divider {
-  color: #555;
-  font-size: 13px;
+  color: rgba(255, 255, 255, 0.1);
+  font-size: 12px;
 }
-.avatar {
-  width: 100px;
-  height: 100px;
+
+/* ─── Profile ─── */
+.profile {
+  padding-top: 62px;
+  margin-bottom: 24px;
+}
+
+.avatar-ring {
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 3px;
+  background: transparent;
+  margin: 0 auto 14px;
 }
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.profile-name {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.profile-handle {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.28);
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+/* ─── Tabs ─── */
 .tabs {
   display: flex;
-  justify-content: center;
-  margin-top: 10px;
-  background: #222;
-  border-radius: 12px;
-  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 4px;
 }
+
 .tabs button {
   flex: 1;
-  background: #222;
+  background: transparent;
   border: none;
-  padding: 10px 20px;
-  color: white;
+  padding: 9px 20px;
+  color: rgba(255, 255, 255, 0.35);
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 10px;
+  transition: all 0.22s ease;
+  letter-spacing: 0.2px;
 }
+
 .tabs .active {
-  background: white;
-  color: black;
+  background: #fff;
+  color: #0a0a0a;
 }
+
+/* ─── Links ─── */
 .links {
-  margin-top: 20px;
-}
-.link-item {
-  background: #222;
-  padding: 12px;
+  margin-top: 14px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #333;
+  flex-direction: column;
+  gap: 7px;
 }
-.link-item:first-child {
-  border-radius: 12px 12px 0 0;
+
+.link-item {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
 }
-.link-item.last {
-  border-radius: 0 0 12px 12px;
-  border-bottom: 12px solid #222;
+
+.link-item:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.14);
+  transform: translateY(-1px);
 }
+
 .telegram-item {
-  background: #222;
-  padding: 12px;
-  margin-top: 35px;
-  border-radius: 12px;
+  margin-top: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.06);
 }
-.telegram-item a, .link-item a {
+
+.telegram-item .tg-icon {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.link-anchor {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   color: white;
   text-decoration: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: 500;
+  padding: 13px 16px;
 }
+
 .link-content {
   display: flex;
   align-items: center;
+  gap: 12px;
 }
-.icon {
-  margin-right: 10px;
+
+.link-icon-wrap {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.65);
+  transition: background 0.2s, color 0.2s;
 }
+
+.link-item:hover .link-icon-wrap {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
 .link-text {
-  margin-left: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
 }
+
 .arrow {
-  font-size: 18px;
-  margin-left: auto;
+  color: rgba(255, 255, 255, 0.18);
+  flex-shrink: 0;
+  transition: color 0.2s, transform 0.2s;
 }
+
+.link-item:hover .arrow {
+  color: rgba(255, 255, 255, 0.4);
+  transform: translateX(2px);
+}
+
+.designed-by {
+  margin-top: 28px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.13);
+  letter-spacing: 0.5px;
+}
+
+/* ─── Blog ─── */
 .blog {
-  margin-top: 20px;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .blog-post {
-  background: #222;
-  padding-bottom: 12px;
-  margin-bottom: 15px;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.post-image-wrap {
+  position: relative;
+  cursor: pointer;
   overflow: hidden;
 }
 
 .post-image {
   display: block;
-  width: 100%; 
+  width: 100%;
   max-height: 360px;
   object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.post-image-wrap:hover .post-image {
+  transform: scale(1.03);
+}
+
+.post-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10, 10, 10, 0.45) 0%, transparent 55%);
+  pointer-events: none;
 }
 
 .post-content {
-  padding: 12px;
+  padding: 14px 16px 16px;
   text-align: left;
 }
 
 .post-text-content {
-  margin-bottom: 8px;
-}
-.post-text-content p {
+  font-size: 15px;
   font-weight: 300;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.65;
+  margin-bottom: 10px;
 }
 
-.post-text {
-  font-size: 16px;
-  color: white;
+.post-text-content p {
   margin-bottom: 8px;
-  font-weight: 300; 
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.post-text-content p:last-child { margin-bottom: 0; }
+
+.post-text-content h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.post-text-content i {
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .post-date {
-  font-size: 14px;
-  color: gray;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.3px;
 }
 
+/* ─── Modal ─── */
 .modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(12px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -745,7 +806,7 @@ html, body {
 
 .modal-content {
   position: relative;
-  max-width: 90%;
+  max-width: 92%;
   max-height: 90%;
 }
 
@@ -753,22 +814,172 @@ html, body {
   width: 100%;
   max-height: 90vh;
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: 14px;
 }
 
 .close {
   position: absolute;
-  top: 10px;
-  right: 15px;
+  top: -14px;
+  right: -14px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.3);
-  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
   border-radius: 50%;
+  font-size: 20px;
+  line-height: 1;
+  transition: background 0.2s;
+  user-select: none;
 }
 
 .close:hover {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.25);
 }
 
+/* ─── Fade ─── */
+.fade-enter-active, .fade-leave-active { transition: opacity 0.25s ease; }
+.fade-enter-from, .fade-leave-to       { opacity: 0; }
+
+/* ─── Player overlay ─── */
+.player-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1900;
+}
+
+/* ─── Player modal ─── */
+.player-modal {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 420px;
+  background: rgba(16, 16, 16, 0.97);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: none;
+  border-radius: 24px 24px 0 0;
+  padding: 12px 26px 48px;
+  z-index: 2000;
+}
+
+.player-handle {
+  width: 36px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  margin: 0 auto 26px;
+}
+
+.player-track-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.player-cover {
+  width: 58px;
+  height: 58px;
+  border-radius: 11px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.player-cover-placeholder {
+  width: 58px;
+  height: 58px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+}
+
+.player-meta { text-align: left; }
+
+.player-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.player-artist {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.player-progress {
+  width: 100%;
+  accent-color: #fff;
+  cursor: pointer;
+  margin-bottom: 6px;
+}
+
+.player-time {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.25);
+  margin-bottom: 28px;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+}
+
+.ctrl-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: color 0.2s, transform 0.15s;
+}
+
+.ctrl-btn:hover {
+  color: white;
+  transform: scale(1.1);
+}
+
+.play-btn {
+  width: 58px;
+  height: 58px;
+  background: #fff;
+  border-radius: 50%;
+  color: #0a0a0a;
+}
+
+.play-btn:hover {
+  transform: scale(1.07) !important;
+}
+
+/* ─── Slide-up transition ─── */
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: transform 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.slide-up-enter-from,
+.slide-up-leave-to   { transform: translateX(-50%) translateY(100%); }
+.slide-up-enter-to,
+.slide-up-leave-from { transform: translateX(-50%) translateY(0); }
 </style>
