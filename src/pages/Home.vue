@@ -33,32 +33,6 @@
               <line x1="27" y1="25" x2="69" y2="25" stroke="white" stroke-width="2.4" stroke-linecap="round"/>
             </svg>
           </div>
-          <div class="dragonfly df2">
-            <svg class="df-svg" viewBox="0 0 72 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g class="wings">
-                <ellipse cx="20" cy="12" rx="8" ry="12" transform="rotate(-18 20 12)" stroke="white" stroke-width="0.9" fill="rgba(255,255,255,0.11)"/>
-                <ellipse cx="20" cy="38" rx="8" ry="12" transform="rotate(18 20 38)"  stroke="white" stroke-width="0.9" fill="rgba(255,255,255,0.11)"/>
-                <ellipse cx="29" cy="14" rx="6.5" ry="10" transform="rotate(-12 29 14)" stroke="white" stroke-width="0.75" fill="rgba(255,255,255,0.07)"/>
-                <ellipse cx="29" cy="36" rx="6.5" ry="10" transform="rotate(12 29 36)"  stroke="white" stroke-width="0.75" fill="rgba(255,255,255,0.07)"/>
-              </g>
-              <circle cx="7" cy="25" r="4.5" fill="white"/>
-              <ellipse cx="20" cy="25" rx="7.5" ry="4.5" fill="white"/>
-              <line x1="27" y1="25" x2="69" y2="25" stroke="white" stroke-width="2.4" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="dragonfly df3">
-            <svg class="df-svg" viewBox="0 0 72 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g class="wings">
-                <ellipse cx="20" cy="12" rx="8" ry="12" transform="rotate(-18 20 12)" stroke="white" stroke-width="0.9" fill="rgba(255,255,255,0.11)"/>
-                <ellipse cx="20" cy="38" rx="8" ry="12" transform="rotate(18 20 38)"  stroke="white" stroke-width="0.9" fill="rgba(255,255,255,0.11)"/>
-                <ellipse cx="29" cy="14" rx="6.5" ry="10" transform="rotate(-12 29 14)" stroke="white" stroke-width="0.75" fill="rgba(255,255,255,0.07)"/>
-                <ellipse cx="29" cy="36" rx="6.5" ry="10" transform="rotate(12 29 36)"  stroke="white" stroke-width="0.75" fill="rgba(255,255,255,0.07)"/>
-              </g>
-              <circle cx="7" cy="25" r="4.5" fill="white"/>
-              <ellipse cx="20" cy="25" rx="7.5" ry="4.5" fill="white"/>
-              <line x1="27" y1="25" x2="69" y2="25" stroke="white" stroke-width="2.4" stroke-linecap="round"/>
-            </svg>
-          </div>
         </div>
         <div class="avatar-ring">
           <img src="/src/assets/profile.png" alt="Profile" class="avatar" />
@@ -221,12 +195,12 @@ export default {
       telegramLink: { name: 'Telegram', url: 'https://t.me/ocnjandres', icon: 'uit:telegram-alt' },
       telegramLinkKz: { name: 'Telegram', url: 'https://t.me/ocnjandres', icon: 'uit:telegram-alt' },
       blogPosts: [
-        {
+        /* {
           id: 11,
           text: `She wanted him to see the colors of the world, and eventually, he did. He saw them all. But none of them seemed to stick. Three years later, through every sunrise and every shadow, he was still looking for the one that looked like her.`,
           image: 'blog/ten.PNG',
           date: '18:30 • May 8, 2026'
-        },
+        }, */
         {
           id: 10,
           text: `<p>We so often put life off for later. We think: "I'll do it later", "now's not the time", "someday". And there seem to be reasons, but honestly — most of the time it's just fear. Fear of disappointing someone, not living up to expectations, looking stupid, or being judged.</p>
@@ -307,12 +281,12 @@ export default {
         { id: 2, text: 'Welcome to my personal profile', date: '11:21 • Mar 19, 2025' }
       ],
       blogPostsKz: [
-        {
+        /* {
           id: 11,
           text: `Ол жігіттің бұл өмірдің барлық бояуын көргенін қалады. Уақыт өте келе, ол шынымен де бәрін көрді. Бірақ сол түстердің ешқайсысы оның жанында тұрақтап қалмады. Үш жыл өтсе де, әрбір атқан таң мен әрбір түскен көлеңкенің арасынан ол әлі де тек оған ұқсайтын сол бір түсті іздеумен жүр.`,
           image: 'blog/ten.PNG',
           date: '18:30 • Мамыр 8, 2026'
-        },
+        }, */
         {
           id: 10,
           text: `<p>Өмірді жиі ертеңге қалдырамыз. «Кейін жасармын», «қазір уақыты емес», «бір күні» деп ойлаймыз. Себептер бар сияқты, бірақ шынын айтсақ — көбінесе бұл жай ғана қорқыныш. Біреуді көңілін қалдырудан, үмітті ақтамаудан, ақымақ болып көрінуден немесе сын естуден қорқу.</p>
