@@ -52,6 +52,7 @@
         v-for="(link, index) in filteredLinks"
         :key="link.name"
         class="link-item"
+        :class="{ 'link-item--disabled': link.disabled }"
       >
         <router-link
           v-if="link.internal"
@@ -68,7 +69,13 @@
           <Icon icon="lets-icons:expand-right-light" width="20" height="20" class="arrow" />
         </router-link>
 
-        <a v-else :href="link.url" target="_blank" class="link-anchor" @click="sendTelegramMessage(`User clicked on ${link.name} 🚀`)">
+        <a
+          v-else
+          :href="link.disabled ? undefined : link.url"
+          :target="link.disabled ? undefined : '_blank'"
+          class="link-anchor"
+          @click="!link.disabled && sendTelegramMessage(`User clicked on ${link.name} 🚀`)"
+        >
           <div class="link-content">
             <div class="link-icon-wrap">
               <Icon :icon="link.icon" width="20" height="20" />
@@ -179,18 +186,18 @@ export default {
       links: [
         { name: 'Gallery', url: '/gallery', icon: 'lets-icons:img-box-duotone-line', internal: true },
         { name: 'My Ratings', url: '/ratings', icon: 'lets-icons:fire-light', internal: true },
-        { name: 'Telegram Channel', url: 'https://t.me/oljawavetime', icon: 'uit:telegram-alt' },
-        { name: 'Behance Portfolio', url: 'https://www.behance.net/olzhasgabdullin', icon: 'ph:behance-logo-light' },
-        { name: 'LinkedIn Profile', url: 'https://www.linkedin.com/in/olzhas-gabdullin-87aa7123b/', icon: 'circum:linkedin' },
-        { name: 'YouTube', url: 'https://www.youtube.com/@oljawave', icon: 'ph:youtube-logo-light' }
+        { name: 'Telegram Channel', url: 'https://t.me/oljawavetime', icon: 'uit:telegram-alt', disabled: true },
+        { name: 'Behance Portfolio', url: 'https://www.behance.net/olzhasgabdullin', icon: 'ph:behance-logo-light', disabled: true },
+        { name: 'LinkedIn Profile', url: 'https://www.linkedin.com/in/olzhas-gabdullin-87aa7123b/', icon: 'circum:linkedin', disabled: true },
+        { name: 'YouTube', url: 'https://www.youtube.com/@oljawave', icon: 'ph:youtube-logo-light', disabled: true }
       ],
       linksKz: [
         { name: 'Галерея', url: '/gallery', icon: 'lets-icons:img-box-duotone-line', internal: true },
         { name: 'Менің рейтингтерім', url: '/ratings', icon: 'lets-icons:fire-light', internal: true },
-        { name: 'Telegram арнасы', url: 'https://t.me/oljawavetime', icon: 'uit:telegram-alt' },
-        { name: 'Behance портфолиосы', url: 'https://www.behance.net/olzhasgabdullin', icon: 'ph:behance-logo-light' },
-        { name: 'LinkedIn профилі', url: 'https://www.linkedin.com/in/olzhas-gabdullin-87aa7123b/', icon: 'circum:linkedin' },
-        { name: 'YouTube', url: 'https://www.youtube.com/@oljawave', icon: 'ph:youtube-logo-light' }
+        { name: 'Telegram арнасы', url: 'https://t.me/oljawavetime', icon: 'uit:telegram-alt', disabled: true },
+        { name: 'Behance портфолиосы', url: 'https://www.behance.net/olzhasgabdullin', icon: 'ph:behance-logo-light', disabled: true },
+        { name: 'LinkedIn профилі', url: 'https://www.linkedin.com/in/olzhas-gabdullin-87aa7123b/', icon: 'circum:linkedin', disabled: true },
+        { name: 'YouTube', url: 'https://www.youtube.com/@oljawave', icon: 'ph:youtube-logo-light', disabled: true }
       ],
       telegramLink: { name: 'Telegram', url: 'https://t.me/ocnjandres', icon: 'uit:telegram-alt' },
       telegramLinkKz: { name: 'Telegram', url: 'https://t.me/ocnjandres', icon: 'uit:telegram-alt' },
@@ -770,6 +777,11 @@ html, body {
   background: rgba(255, 255, 255, 0.07);
   border-color: rgba(255, 255, 255, 0.14);
   transform: translateY(-1px);
+}
+
+.link-item--disabled {
+  opacity: 0.35;
+  pointer-events: none;
 }
 
 .telegram-item {
