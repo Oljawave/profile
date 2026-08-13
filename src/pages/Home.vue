@@ -202,12 +202,13 @@ export default {
       telegramLink: { name: 'Telegram', url: 'https://t.me/ocnjandres', icon: 'uit:telegram-alt' },
       telegramLinkKz: { name: 'Telegram', url: 'https://t.me/ocnjandres', icon: 'uit:telegram-alt' },
       blogPosts: [
-        /* {
+        {
           id: 11,
-          text: `She wanted him to see the colors of the world, and eventually, he did. He saw them all. But none of them seemed to stick. Three years later, through every sunrise and every shadow, he was still looking for the one that looked like her.`,
-          image: 'blog/ten.PNG',
-          date: '18:30 • May 8, 2026'
-        }, */
+          text: `<p>— ... and I hope that fate has it's way to show you the colors in life.</p>
+                <p>— Maybe life has always been full of colors… but somehow, my eyes kept searching for you in every shade.</p>`,
+          image: 'blog/ten.JPG',
+          date: '20:42 • August 07, 2026'
+        },
         {
           id: 10,
           text: `<p>We so often put life off for later. We think: "I'll do it later", "now's not the time", "someday". And there seem to be reasons, but honestly — most of the time it's just fear. Fear of disappointing someone, not living up to expectations, looking stupid, or being judged.</p>
@@ -288,12 +289,13 @@ export default {
         { id: 2, text: 'Welcome to my personal profile', date: '11:21 • Mar 19, 2025' }
       ],
       blogPostsKz: [
-        /* {
+        {
           id: 11,
-          text: `Ол жігіттің бұл өмірдің барлық бояуын көргенін қалады. Уақыт өте келе, ол шынымен де бәрін көрді. Бірақ сол түстердің ешқайсысы оның жанында тұрақтап қалмады. Үш жыл өтсе де, әрбір атқан таң мен әрбір түскен көлеңкенің арасынан ол әлі де тек оған ұқсайтын сол бір түсті іздеумен жүр.`,
-          image: 'blog/ten.PNG',
-          date: '18:30 • Мамыр 8, 2026'
-        }, */
+          text: `<p>— ...және тағдырдың өзі саған осы өмірдегі түстерді көрсететініне сенемін.</p>
+                <p>— Мүмкін, өмір әрқашан түрлі-түсті болған да шығар... бірақ неге екенін білмеймін, көзім әр реңкте сені іздей береді...</p>`,
+          image: 'blog/ten.JPG',
+          date: '20:42 • Тамыз 13, 2026'
+        },
         {
           id: 10,
           text: `<p>Өмірді жиі ертеңге қалдырамыз. «Кейін жасармын», «қазір уақыты емес», «бір күні» деп ойлаймыз. Себептер бар сияқты, бірақ шынын айтсақ — көбінесе бұл жай ғана қорқыныш. Біреуді көңілін қалдырудан, үмітті ақтамаудан, ақымақ болып көрінуден немесе сын естуден қорқу.</p>
